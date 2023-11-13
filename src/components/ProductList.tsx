@@ -4,7 +4,7 @@ import { getProducts } from '../api/api';
 interface Product {
   id: number;
   name: string;
-  price: number;
+  price: string;
 }
 
 interface ApiResponse {
@@ -21,11 +21,15 @@ const ProductList: React.FC = () => {
     const fetchData = async () => {
       try {
         const response: ApiResponse = await getProducts(1, 5);
-        if (response.products && Array.isArray(response.products)) {
-          setProducts(response.products);
-        } else {
-          setError('Resposta da API não contém uma propriedade "products" que é um array.');
-        }
+        const numberFormatter = new Intl.NumberFormat('pt-BR', {
+          style: 'currency',
+          currency: 'BRL',
+        });
+        const productsWithFormattedPrices = response.products.map((product) => ({
+          ...product,
+          price: numberFormatter.format(parseFloat(product.price)),
+        }));
+        setProducts(productsWithFormattedPrices);
       } catch (error: any) {
         console.error('Erro ao buscar produtos:', error);
         setError(`Erro ao buscar produtos. Detalhes: ${(error as Error).message}`);
@@ -47,16 +51,15 @@ const ProductList: React.FC = () => {
 
   return (
     <div>
-    <h1>Lista de Produtos</h1>
-    <ul>
-      {products.map((product) => (
-        <li key={product.id}>
-          <strong>{product.name}</strong> - R${typeof product.price === 'number' ? product.price.toFixed(2) : 'Preço inválido'}
-          {/* Adicione outras informações do produto conforme necessário */}
-        </li>
-      ))}
-    </ul>
-  </div>
+      <h1>Lista de Produtos</h1>
+      <ul>
+        {products.map((product) => (
+          <li key={product.id}>
+            <strong>{product.name}</strong> - {product.price}
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 };
 
