@@ -1,12 +1,13 @@
+import React from 'react';
 import ProductList from '../components/ProductList';
 
-const Home = () => {
+const Index: React.FC = () => {
   return (
     <div>
-      <h1>Home</h1>
+      <h1>Página Inicial</h1>
       <ProductList />
     </div>
   );
 };
 
-export default Home;
+export default Index;
