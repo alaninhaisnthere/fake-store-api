@@ -9,6 +9,7 @@ interface Product {
   description: string;
   image: string;
 }
+
 const ProductList: React.FC = () => {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
@@ -17,13 +18,9 @@ const ProductList: React.FC = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await getProducts(1, 8);
+        const fetchedProducts = await getProducts(1, 8);
 
-        if (Array.isArray(response)) {
-          setProducts(response);
-        } else {
-          setError('Invalid response format');
-        }
+        setProducts(fetchedProducts);
       } catch (error) {
         console.error('Error fetching data:', error);
         setError('Error fetching data');
@@ -44,10 +41,12 @@ const ProductList: React.FC = () => {
   }
 
   return (
-    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexWrap: 'wrap' }}>
-      {products.map((product) => (
-        <ProductCard key={product.id} product={product} isLoading={false} />
-      ))}
+    <div style={{ display: 'flex', justifyContent: 'center' }}>
+      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '22px' }}>
+        {products.map((product) => (
+          <ProductCard key={product.id} product={product} isLoading={false} />
+        ))}
+      </div>
     </div>
   );
 };

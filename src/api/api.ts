@@ -16,7 +16,7 @@ export const getProducts = async (page: number, rows: number): Promise<any> => {
       },
     });
 
-    if (response.data && Array.isArray(response.data.products)) {
+    if (response.data && response.data.products && Array.isArray(response.data.products)) {
       return response.data.products;
     } else {
       throw new Error('Invalid response format');
