@@ -1,7 +1,7 @@
 import { createGlobalStyle } from 'styled-components';
 
 const GlobalStyles = createGlobalStyle`
-  /* Adicione estilos globais aqui */
+  /* askajhfadf */
 `;
 
 export default GlobalStyles;

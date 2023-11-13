@@ -16,7 +16,11 @@ export const getProducts = async (page: number, rows: number): Promise<any> => {
       },
     });
 
-    return response.data;
+    if (response.data && Array.isArray(response.data.products)) {
+      return response.data.products;
+    } else {
+      throw new Error('Invalid response format');
+    }
   } catch (error) {
     console.error('Error fetching data:', error);
     throw error;
