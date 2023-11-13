@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
-import ProductCard from './ProductCard';
-import { getProducts } from '../api/api';
+import React, { useEffect, useState } from "react";
+import ProductCard from "./ProductCard";
+import { getProducts } from "../api/api";
 
 interface Product {
   id: number;
@@ -22,8 +22,8 @@ const ProductList: React.FC = () => {
 
         setProducts(fetchedProducts);
       } catch (error) {
-        console.error('Error fetching data:', error);
-        setError('Error fetching data');
+        console.error("Error fetching data:", error);
+        setError("Error fetching data");
       } finally {
         setLoading(false);
       }
@@ -41,12 +41,19 @@ const ProductList: React.FC = () => {
   }
 
   return (
-    <div style={{ display: 'flex', justifyContent: 'center' }}>
-      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '22px' }}>
-        {products.map((product) => (
-          <ProductCard key={product.id} product={product} isLoading={false} />
-        ))}
-      </div>
+    <div
+      style={{
+        display: "grid",
+        gridTemplateColumns: "repeat(4, 1fr)",
+        gap: "22px",
+        justifyContent: "center",
+        margin: "auto",
+        maxWidth: "1110px",
+      }}
+    >
+      {products.map((product) => (
+        <ProductCard key={product.id} product={product} isLoading={false} />
+      ))}
     </div>
   );
 };
