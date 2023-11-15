@@ -25,7 +25,7 @@ const CardContainer = styled.div<CardContainerProps>`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1); /* Adicionando box-shadow */
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
 `;
 
 const Image = styled.div`
@@ -100,12 +100,21 @@ interface ProductCardProps {
   };
 }
 
+const truncateText = (text: string, maxLength: number): string => {
+  if (text.length <= maxLength) {
+    return text;
+  }
+  return `${text.slice(0, maxLength)}...`;
+};
+
 const ProductCard: React.FC<ProductCardProps> = ({ isLoading = false, product }) => {
+  const truncatedTitle = product ? truncateText(product.title, 25) : '';
+
   return (
     <CardContainer isLoading={isLoading}>
       <Image />
       <ProductInfo>
-        <Name>{isLoading ? 'Loading...' : product?.title}</Name>
+        <Name>{isLoading ? 'Loading...' : truncatedTitle}</Name>
         <PriceWrapper>
           <Price>{isLoading ? 'Loading...' : `R$ ${product?.price}`}</Price>
         </PriceWrapper>
