@@ -93,7 +93,7 @@ interface ProductCardProps {
   isLoading?: boolean;
   product?: {
     id: number;
-    name: string;
+    title: string;
     price: string;
     description: string;
     image: string;
@@ -105,7 +105,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ isLoading = false, product })
     <CardContainer isLoading={isLoading}>
       <Image />
       <ProductInfo>
-        <Name>{isLoading ? 'Loading...' : product?.name}</Name>
+        <Name>{isLoading ? 'Loading...' : product?.title}</Name>
         <PriceWrapper>
           <Price>{isLoading ? 'Loading...' : `R$ ${product?.price}`}</Price>
         </PriceWrapper>

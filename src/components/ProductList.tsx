@@ -4,7 +4,7 @@ import { getProducts } from "../api/api";
 
 interface Product {
   id: number;
-  name: string;
+  title: string;
   price: string;
   description: string;
   image: string;
@@ -18,8 +18,7 @@ const ProductList: React.FC = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const fetchedProducts = await getProducts(1, 8);
-
+        const fetchedProducts = await getProducts();
         setProducts(fetchedProducts);
       } catch (error) {
         console.error("Error fetching data:", error);
