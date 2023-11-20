@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { FaShoppingCart, FaBars, FaTimes } from 'react-icons/fa';
 
 const NavbarContainer = styled.div`
-  position: relative;
+  position: fixed;
   background-color: #FA997D;
   color: #fff;
   padding: 10px;
