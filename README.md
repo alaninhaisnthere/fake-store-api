@@ -1,43 +1,53 @@
-Diretrizes do desafio
-===========================
+# Mock Web Store 🛍️
 
-O objetivo principal desse teste é avaliar sua capacidade de escrever código limpo, bem testado e reutilizável. Ao terminar, faça o deploy da aplicação e mande-nos o link.
+## Descrição 📄
 
-Tarefa (funcional)
----------------
+A Mock Store Web foi idealizada com o objetivo de praticar e demonstrar habilidades em React (usando o Next.js), TypeScript e consumo de API.
 
-Para esse desafio, você deve consumir nossa [API REST de produtos](https://mks-frontend-challenge-04811e8151e6.herokuapp.com/api-docs/) para exibir a lista de produtos da loja.
+## Funcionalidades ✨
 
-A aplicação deve conter apenas uma página/rota e um carrinho.
+- **Listagem de Produtos:** Visualize uma ampla gama de produtos.
+- **Detalhes do Produto:** Explore detalhes sobre cada produto, incluindo preço e descrição.
+- **Carrinho de Compras:** Adicione produtos ao carrinho e veja um resumo dos itens selecionados.
+- **Responsivo:** Experiência adaptada em dispositivos móveis e desktop.
 
-- <b>Loja</b>: A lista de produtos deve ser buscada de nossa API, use um shimmer/skeleton enquanto estiver em loading.
- 
-- <b>Carrinho</b>: O carrinho deve conter todos os produtos selecionados, juntamente com a opção de aumentar a quantidade de cada produto selecionado.
+## Tecnologias Utilizadas 🚀
 
-Use do Jest e a testing-library para realizar os testes unitários.
+- **React (Next.js):** Uma biblioteca poderosa para construção de interfaces de usuário.
+- **TypeScript:** Adiciona tipagem estática ao JavaScript, proporcionando mais segurança e autocompletamento.
+- **Styled Components:** Estilização de componentes com a abordagem CSS-in-JS para maior modularidade.
 
-Recursos
----------------
+## Como Iniciar 🚀
 
-UI/UX: [Figma loja](https://www.figma.com/file/Z4z8osDbK1ET7cjNzFRMrK/MKS-Front-end-challenge?node-id=0%3A1) PS: O design system está incluso, incluindo a fonte.
+1. **Clone o Repositório:**
+   ```bash
+   git clone https://github.com/seu-usuario/fake-store-app.git
+   ```
 
-API: [API REST de produtos](https://mks-frontend-challenge-04811e8151e6.herokuapp.com/api-docs/) para exibir a lista de produtos da loja.
+2. **Instale as Dependências:**
+   ```bash
+   cd fake-store-app
+   npm install
+   ```
 
-Ferramentas requeridas
----------------
+3. **Execute o Projeto:**
+   ```bash
+   npm run dev
+   ```
 
-1. TypeScript
-2. React ou Next.js (Preferimos Next.js)
-3. React-query
-4. Styled-components
-5. Jest
+4. **Acesse no Navegador:**
+   Abra [http://localhost:3000](http://localhost:3000) para visualizar o projeto em seu navegador.
 
-Aspectos técnicos
----------------
+## Contribuições 💡
 
-Todas as ferramentas listadas anteriormente são mandatórias, além delas sinta-se livre para utilizar de qualquer outra technologia que te seja confortável.
+Contribuições e feedbacks são sempre bem-vindos! Se você encontrar bugs, melhorias ou novas funcionalidades que gostaria de adicionar, sinta-se à vontade para abrir uma issue ou enviar um pull request.
 
-Faça o deploy!
----------------
+## Autoria 🧑‍💻
 
-Ao finalizar, faça o deploy no lugar que te for confortável (exemplo: Vercel, Netlify, Heroku, Amazon EC2, App Runner, etc)
+- **Alana Oliveira**
+  - GitHub: [github.com/alaninhaisnthere](https://github.com/alaninhaisnthere)
+  - LinkedIn: [linkedin.com/in/alanaoliveira71](https://linkedin.com/in/alanaoliveira71)
+
+---
+
+XOXO, Alana Oliveira (a.k.a. Alaninha) 🌸
