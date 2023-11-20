@@ -33,7 +33,8 @@ const Image = styled.div`
   height: 150px;
   background-color: #ccc;
   border-radius: 8px;
-  animation: ${shimmer} 2s infinite linear;
+  background-size: cover;
+  background-position: center;
 `;
 
 const ProductInfo = styled.div`
@@ -72,6 +73,7 @@ const BottomSection = styled.div`
   background-color: #0f52ba;
   height: 32px;
   width: 100%;
+  cursor: pointer;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -112,7 +114,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ isLoading = false, product })
 
   return (
     <CardContainer isLoading={isLoading}>
-      <Image />
+      <Image style={{ backgroundImage: `url(${product?.image})` }} />
       <ProductInfo>
         <Name>{isLoading ? 'Loading...' : truncatedTitle}</Name>
         <PriceWrapper>
