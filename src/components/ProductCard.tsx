@@ -126,7 +126,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ isLoading = false, product })
         <Description>{isLoading ? 'Loading...' : productDescription}</Description>
       </ProductInfo>
       <BottomSection>
-        <BuyButton>Comprar</BuyButton>
+        <BuyButton>Buy it!</BuyButton>
       </BottomSection>
     </CardContainer>
   );
