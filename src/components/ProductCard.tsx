@@ -15,8 +15,8 @@ const shimmer = keyframes`
 `;
 
 const CardContainer = styled.div<CardContainerProps>`
-  width: 218px;
-  height: 285px;
+  width: 100%; 
+  height: auto;
   background-color: #fff;
   border-radius: 8px;
   overflow: hidden;
@@ -30,11 +30,13 @@ const CardContainer = styled.div<CardContainerProps>`
 
 const Image = styled.div`
   width: 100%;
-  height: 150px;
+  height: 0;
+  padding-top: 75%;
   background-color: #ccc;
   border-radius: 8px;
   background-size: cover;
   background-position: center;
+  animation: ${shimmer} 2s infinite linear;
 `;
 
 const ProductInfo = styled.div`
@@ -70,7 +72,7 @@ const Description = styled.p`
 `;
 
 const BottomSection = styled.div`
-  background-color: #0f52ba;
+  background-color: #FA997D;
   height: 32px;
   width: 100%;
   cursor: pointer;
@@ -111,6 +113,7 @@ const truncateText = (text: string, maxLength: number): string => {
 
 const ProductCard: React.FC<ProductCardProps> = ({ isLoading = false, product }) => {
   const truncatedTitle = product ? truncateText(product.title, 25) : '';
+  const productDescription = product?.description || 'Loading...';
 
   return (
     <CardContainer isLoading={isLoading}>
@@ -120,7 +123,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ isLoading = false, product })
         <PriceWrapper>
           <Price>{isLoading ? 'Loading...' : `R$ ${product?.price}`}</Price>
         </PriceWrapper>
-        <Description>{isLoading ? 'Loading...' : 'Redesigned from scratch and completely revised.'}</Description>
+        <Description>{isLoading ? 'Loading...' : productDescription}</Description>
       </ProductInfo>
       <BottomSection>
         <BuyButton>Comprar</BuyButton>
