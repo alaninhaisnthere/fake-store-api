@@ -1,5 +1,5 @@
-import React from 'react';
-import styled, { keyframes } from 'styled-components';
+import React from "react";
+import styled, { keyframes } from "styled-components";
 
 interface CardContainerProps {
   isLoading?: boolean;
@@ -15,7 +15,7 @@ const shimmer = keyframes`
 `;
 
 const CardContainer = styled.div<CardContainerProps>`
-  width: 100%; 
+  width: 100%;
   height: auto;
   background-color: #fff;
   border-radius: 8px;
@@ -47,7 +47,7 @@ const Name = styled.h3`
   font-size: 16px;
   font-weight: normal;
   margin-bottom: 8px;
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
 `;
 
 const PriceWrapper = styled.div`
@@ -61,18 +61,18 @@ const Price = styled.span`
   font-size: 15px;
   font-weight: bold;
   color: #373737;
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
 `;
 
 const Description = styled.p`
   font-size: 10px;
   color: #777;
   margin-bottom: 16px;
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
 `;
 
 const BottomSection = styled.div`
-  background-color: #FA997D;
+  background-color: #fa997d;
   height: 32px;
   width: 100%;
   cursor: pointer;
@@ -90,7 +90,7 @@ const BuyButton = styled.button`
   cursor: pointer;
   font-weight: 600;
   font-size: 14px;
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
 `;
 
 interface ProductCardProps {
@@ -111,19 +111,24 @@ const truncateText = (text: string, maxLength: number): string => {
   return `${text.slice(0, maxLength)}...`;
 };
 
-const ProductCard: React.FC<ProductCardProps> = ({ isLoading = false, product }) => {
-  const truncatedTitle = product ? truncateText(product.title, 25) : '';
-  const productDescription = product?.description || 'Loading...';
+const ProductCard: React.FC<ProductCardProps> = ({
+  isLoading = false,
+  product,
+}) => {
+  const truncatedTitle = product ? truncateText(product.title, 25) : "";
+  const productDescription = product?.description || "Loading...";
 
   return (
     <CardContainer isLoading={isLoading}>
       <Image style={{ backgroundImage: `url(${product?.image})` }} />
       <ProductInfo>
-        <Name>{isLoading ? 'Loading...' : truncatedTitle}</Name>
+        <Name>{isLoading ? "Loading..." : truncatedTitle}</Name>
         <PriceWrapper>
-          <Price>{isLoading ? 'Loading...' : `R$ ${product?.price}`}</Price>
+          <Price>{isLoading ? "Loading..." : `R$ ${product?.price}`}</Price>
         </PriceWrapper>
-        <Description>{isLoading ? 'Loading...' : productDescription}</Description>
+        <Description>
+          {isLoading ? "Loading..." : productDescription}
+        </Description>
       </ProductInfo>
       <BottomSection>
         <BuyButton>Buy it!</BuyButton>

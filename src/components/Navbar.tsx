@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
-import { FaShoppingCart, FaBars, FaTimes } from 'react-icons/fa';
+import React, { useState } from "react";
+import styled from "styled-components";
+import { FaShoppingCart, FaBars, FaTimes } from "react-icons/fa";
 
 const NavbarContainer = styled.div`
   position: fixed;
-  background-color: #FA997D;
+  background-color: #fa997d;
   color: #fff;
   padding: 10px;
   margin-bottom: 20px;
@@ -56,7 +56,7 @@ const CategoriesToggle = styled.button`
 const CategoriesContainer = styled.div<{ showCategories: boolean }>`
   position: absolute;
   top: 100%;
-  display: ${(props) => (props.showCategories ? 'flex' : 'none')};
+  display: ${(props) => (props.showCategories ? "flex" : "none")};
   flex-direction: column;
   align-items: flex-end;
   margin-top: 10px;
@@ -78,35 +78,48 @@ const CategoryLink = styled.a`
 interface NavbarProps {
   categories: string[];
 }
-
 const Navbar: React.FC<NavbarProps> = ({ categories }) => {
-    const [showCategories, setShowCategories] = useState(false);
-  
-    const toggleCategories = () => {
-      setShowCategories(!showCategories);
-    };
-  
-    return (
-      <NavbarContainer>
-        <Logo>FakeStore</Logo>
-        <SearchContainer>
-          <SearchInput type="text" placeholder="Search products..." />
-          <CartButton>
-            <FaShoppingCart />
-          </CartButton>
-        </SearchContainer>
-        <CategoriesToggle onClick={toggleCategories}>
-          {showCategories ? <FaTimes /> : <FaBars />}
-        </CategoriesToggle>
-        <CategoriesContainer showCategories={showCategories}>
-          {categories.map((category) => (
-            <CategoryLink key={category} href={`#${category}`}>
-              {category}
-            </CategoryLink>
-          ))}
-        </CategoriesContainer>
-      </NavbarContainer>
-    );
+  const [showCategories, setShowCategories] = useState(false);
+  const [activeCategory, setActiveCategory] = useState<string | null>(null);
+
+  const toggleCategories = () => {
+    setShowCategories(!showCategories);
   };
-  
-  export default Navbar;
+
+  const handleCategoryClick = (category: string) => {
+    setActiveCategory(category);
+    setShowCategories(false);
+  };
+
+  const handleLogoClick = () => {
+    setActiveCategory(null);
+  };
+
+  return (
+    <NavbarContainer>
+      <Logo onClick={handleLogoClick}>FakeStore</Logo>
+      <SearchContainer>
+        <SearchInput type="text" placeholder="Search products..." />
+        <CartButton>
+          <FaShoppingCart />
+        </CartButton>{" "}
+      </SearchContainer>
+      <CategoriesToggle onClick={toggleCategories}>
+        {showCategories ? <FaTimes /> : <FaBars />}
+      </CategoriesToggle>
+      <CategoriesContainer showCategories={showCategories}>
+        {categories.map((category) => (
+          <CategoryLink
+            key={category}
+            href={`#${category}`}
+            onClick={() => handleCategoryClick(category)}
+          >
+            {category}
+          </CategoryLink>
+        ))}
+      </CategoriesContainer>
+    </NavbarContainer>
+  );
+};
+
+export default Navbar;
