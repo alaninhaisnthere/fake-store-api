@@ -36,7 +36,6 @@ const Image = styled.div`
   border-radius: 8px;
   background-size: cover;
   background-position: center;
-  animation: ${shimmer} 2s infinite linear;
 `;
 
 const ProductInfo = styled.div`

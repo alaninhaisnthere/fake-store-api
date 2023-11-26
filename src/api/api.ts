@@ -1,6 +1,6 @@
-import axios from 'axios';
+import axios from "axios";
 
-const API_BASE_URL = 'https://fakestoreapi.com';
+const API_BASE_URL = "https://fakestoreapi.com";
 
 export const getProducts = async (): Promise<any> => {
   try {
@@ -9,10 +9,10 @@ export const getProducts = async (): Promise<any> => {
     if (response.data && Array.isArray(response.data)) {
       return response.data;
     } else {
-      throw new Error('Invalid response format');
+      throw new Error("Invalid response format");
     }
   } catch (error) {
-    console.error('Error fetching data:', error);
+    console.error("Error fetching data:", error);
     throw error;
   }
 };

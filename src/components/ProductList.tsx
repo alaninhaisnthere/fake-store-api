@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
-import ProductCard from "./ProductCard";
-import { getProducts } from "../api/api";
-import { styled } from "styled-components";
+import React, { useEffect, useState } from 'react';
+import ProductCard from './ProductCard';
+import { getProducts } from '../api/api';
+import styled from 'styled-components';
 
 interface Product {
   id: number;
@@ -28,21 +28,18 @@ const ProductList: React.FC = () => {
         const fetchedProducts = await getProducts();
         setProducts(fetchedProducts);
       } catch (error) {
-        console.error("Error fetching data:", error);
-        setError("Error fetching data");
+        console.error('Error fetching data:', error);
+        setError('Error fetching data');
       } finally {
         setLoading(false);
       }
     };
 
     fetchData();
-  }, []);
+  }, [activeCategory]);
 
   const filteredProducts = activeCategory
-    ? products.filter(
-        (product) =>
-          product.category.toLowerCase() === activeCategory.toLowerCase()
-      )
+    ? products.filter((product) => product.category.toLowerCase() === activeCategory.toLowerCase())
     : products;
 
   if (loading) {
@@ -57,12 +54,12 @@ const ProductList: React.FC = () => {
     <ContentContainer>
       <div
         style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(4, 1fr)",
-          gap: "22px",
-          justifyContent: "center",
-          margin: "auto",
-          maxWidth: "1110px",
+          display: 'grid',
+          gridTemplateColumns: 'repeat(4, 1fr)',
+          gap: '22px',
+          justifyContent: 'center',
+          margin: 'auto',
+          maxWidth: '1110px',
         }}
       >
         {filteredProducts.map((product) => (

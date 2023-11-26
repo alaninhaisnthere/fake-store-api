@@ -80,7 +80,7 @@ interface NavbarProps {
 }
 const Navbar: React.FC<NavbarProps> = ({ categories }) => {
   const [showCategories, setShowCategories] = useState(false);
-  const [activeCategory, setActiveCategory] = useState<string | null>(null);
+  const [activeCategory, setActiveCategory] = useState<string | null>(null); //checar o activecategory depois!!!!!
 
   const toggleCategories = () => {
     setShowCategories(!showCategories);
@@ -114,7 +114,7 @@ const Navbar: React.FC<NavbarProps> = ({ categories }) => {
             href={`#${category}`}
             onClick={() => handleCategoryClick(category)}
           >
-            {category}
+            {category.charAt(0).toUpperCase() + category.slice(1)}{" "}
           </CategoryLink>
         ))}
       </CategoriesContainer>
