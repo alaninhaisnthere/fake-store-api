@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
-import { AppProps } from 'next/app';
-import Navbar from '../components/Navbar';
-import Login from '../components/Login';
-import { getAllUsers } from '../api/api';
+import React, { useState, useEffect } from "react";
+import { AppProps } from "next/app";
+import Navbar from "../components/Navbar";
+import Login from "../components/Login";
+import { getAllUsers } from "../api/api";
 
-import GlobalStyles from '../components/GlobalStyles';
+import GlobalStyles from "../components/GlobalStyles";
 
 function MyApp({ Component, pageProps }: AppProps) {
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
@@ -13,11 +13,14 @@ function MyApp({ Component, pageProps }: AppProps) {
   const handleLogin = async (email: string, password: string) => {
     try {
       const users = await getAllUsers();
-      const authenticatedUser = users.find((user: { email: string; password: string; }) => user.email === email && user.password === password);
+      const authenticatedUser = users.find(
+        (user: { email: string; password: string }) =>
+          user.email === email && user.password === password
+      );
 
       if (authenticatedUser) {
         setIsLoggedIn(true);
-        localStorage.setItem('isLoggedIn', 'true');
+        localStorage.setItem("isLoggedIn", "true");
       } else {
         alert("Credenciais inválidas");
       }
@@ -28,11 +31,11 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   const handleLogout = () => {
     setIsLoggedIn(false);
-    localStorage.removeItem('isLoggedIn');
+    localStorage.removeItem("isLoggedIn");
   };
 
   useEffect(() => {
-    const userIsLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+    const userIsLoggedIn = localStorage.getItem("isLoggedIn") === "true";
     setIsLoggedIn(userIsLoggedIn);
   }, []);
 
@@ -40,75 +43,22 @@ function MyApp({ Component, pageProps }: AppProps) {
     <>
       {isLoggedIn && (
         <Navbar
-          categories={["electronics", "jewelry", "men's clothing", "women's clothing"]}
+          categories={[
+            "electronics",
+            "jewelry",
+            "men's clothing",
+            "women's clothing",
+          ]}
           activeCategory={activeCategory}
           setActiveCategory={setActiveCategory}
           onLogout={handleLogout}
         />
       )}
-      {isLoggedIn ? (
-        <>
-          <Component {...pageProps} />
-        </>
-      ) : (
-        <Login onLogin={handleLogin} />
-      )}
+      {isLoggedIn && <Component {...pageProps} />}
+      {!isLoggedIn && <Login onLogin={handleLogin} />}
       <GlobalStyles />
     </>
   );
 }
 
 export default MyApp;
-
-
-
-// import React, { useState, useEffect } from 'react';
-// import { AppProps } from 'next/app';
-// import Navbar from '../components/Navbar';
-// import Login from '../components/Login';
-// import { getAllUsers } from '../api/api';
-
-// import GlobalStyles from '../components/GlobalStyles';
-
-// function MyApp({ Component, pageProps }: AppProps) {
-//   const [activeCategory, setActiveCategory] = useState<string | null>(null);
-//   const [isLoggedIn, setIsLoggedIn] = useState(false);
-
-//   const handleLogin = async (email: string, password: string) => {
-//     try {
-//       const allUsers = await getAllUsers();
-      
-//       const userExists = allUsers.some(
-//         (user: { email: string; password: string; }) => user.email === email && user.password === password
-//       );
-      
-//       if (userExists) {
-//         setIsLoggedIn(true);
-//       } else {
-//         alert("Credenciais inválidas");
-//       }
-//     } catch (error) {
-//       console.error("Erro ao obter usuários:", error);
-//     }
-//   };
-
-//   return (
-//     <>
-//       <Navbar
-//         categories={["electronics", "jewelry", "men's clothing", "women's clothing"]}
-//         activeCategory={activeCategory}
-//         setActiveCategory={setActiveCategory}
-//       />
-//       {isLoggedIn ? (
-//         <>
-//           <Component {...pageProps} />
-//         </>
-//       ) : (
-//         <Login onLogin={handleLogin} />
-//       )}
-//       <GlobalStyles />
-//     </>
-//   );
-// }
-
-// export default MyApp;
