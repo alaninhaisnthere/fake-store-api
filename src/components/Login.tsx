@@ -28,10 +28,14 @@ const LoginForm = styled.form`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  width: 40%;
+  width: 80%;
   padding: 20px;
   background-color: #fff;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+
+  @media (max-width: 768px) {
+    width: 100%;
+  }
 `;
 
 const Title = styled.div`
@@ -50,12 +54,13 @@ const Subtitle = styled.p`
   margin-bottom: 20px;
 `;
 
+
 const InputField = styled.input`
   margin-bottom: 20px;
   padding: 8px;
   border: none;
   background-color: #fbce2d5d;
-  width: 50%;
+  width: 100%;
   border-radius: 4px;
   font-family: "Poppins", sans-serif;
   font-weight: 300;

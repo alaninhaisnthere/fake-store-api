@@ -5,19 +5,6 @@ import { useRouter } from "next/router";
 import Image from "next/image";
 import LogoImage from "../assets/logo.svg";
 
-const NavbarContainer = styled.div`
-  position: fixed;
-  background-color: #fbd02d;
-  color: #000000;
-  padding: 15px;
-  margin-bottom: 20px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-  z-index: 1000;
-`;
-
 const Logo = styled.div`
   height: 40px;
   cursor: pointer;
@@ -29,6 +16,13 @@ const SearchContainer = styled.div`
   margin-right: auto;
   margin-left: 20px;
   flex: 1;
+
+  @media (max-width: 768px) {
+    width: 100%;
+    margin: 10px 0;
+    display: flex;
+    align-items: center;
+  }
 `;
 
 const SearchInput = styled.input`
@@ -65,6 +59,10 @@ const CategoriesContainer = styled.div<{ showCategories: boolean }>`
   margin-top: 10px;
   right: 40px;
   width: max-content;
+
+  @media (max-width: 768px) {
+    margin-right: 10px;
+  }
 `;
 
 const CategoryLink = styled.a`
@@ -72,9 +70,59 @@ const CategoryLink = styled.a`
   text-decoration: none;
   margin-top: 5px;
   font-size: 16px;
-
+  background-color: #fbd02d;
+  font-weight: bold;
+  margin-right: 10px;
+  padding: 5px 10px;
+  border-radius: 5px;
+  color: #000;
   &:hover {
     text-decoration: underline;
+  }
+`;
+
+const NavbarContainer = styled.div`
+  position: fixed;
+  background-color: #fbd02d;
+  color: #000000;
+  padding: 15px;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  z-index: 1000;
+
+  @media (max-width: 768px) {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+
+    ${Logo} {
+      width: 100px;
+    }
+
+    ${SearchContainer} {
+      flex: 1;
+      margin-left: 10px;
+    }
+
+    ${SearchInput} {
+      width: 100%;
+    }
+
+    ${CartButton}, ${CategoriesToggle} {
+      font-size: 24px;
+      margin-left: 10px;
+    }
+
+    ${CategoriesContainer} {
+      top: 60px;
+      right: 10px;
+      left: auto;
+      width: auto;
+    }
   }
 `;
 

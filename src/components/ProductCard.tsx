@@ -15,7 +15,7 @@ const shimmer = keyframes`
 `;
 
 const CardContainer = styled.div<CardContainerProps>`
-  width: 100%;
+  width: auto;
   height: auto;
   background-color: #fff;
   border-radius: 8px;
@@ -26,6 +26,12 @@ const CardContainer = styled.div<CardContainerProps>`
   flex-direction: column;
   justify-content: space-between;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  margin: 20px;
+
+  @media (max-width: 768px) {
+    max-width: 100%;
+    margin-bottom: 20px;
+  }
 `;
 
 const Image = styled.div`
@@ -36,10 +42,18 @@ const Image = styled.div`
   border-radius: 8px;
   background-size: cover;
   background-position: center;
+
+  @media (max-width: 768px) {
+    height: 200px;
+  }
 `;
 
 const ProductInfo = styled.div`
   padding: 16px;
+
+  @media (max-width: 768px) {
+    padding: 10px;
+  }
 `;
 
 const Name = styled.h3`
@@ -80,6 +94,10 @@ const BottomSection = styled.div`
   align-items: center;
   border-bottom-left-radius: 8px;
   border-bottom-right-radius: 8px;
+
+  @media (max-width: 768px) {
+    height: 50px;
+  }
 `;
 
 const BuyButton = styled.button`

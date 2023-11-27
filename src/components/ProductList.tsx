@@ -15,6 +15,19 @@ interface Product {
 
 const ContentContainer = styled.div`
   padding-top: 100px;
+  display: grid;
+  gap: 22px;
+  justify-content: center;
+  margin: auto;
+  max-width: 1110px;
+  
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
+
+  @media (min-width: 769px) {
+    grid-template-columns: repeat(4, 1fr);
+  }
 `;
 
 const ProductList: React.FC = () => {
@@ -25,8 +38,9 @@ const ProductList: React.FC = () => {
 
   useEffect(() => {
     const { query } = router;
+
     const activeCategory =
-      typeof query.category === "string" ? query.category : null;
+      typeof query.category === "string" ? query.category : undefined;
 
     const fetchData = async () => {
       try {
@@ -53,20 +67,9 @@ const ProductList: React.FC = () => {
 
   return (
     <ContentContainer>
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(4, 1fr)",
-          gap: "22px",
-          justifyContent: "center",
-          margin: "auto",
-          maxWidth: "1110px",
-        }}
-      >
-        {products.map((product) => (
-          <ProductCard key={product.id} product={product} isLoading={false} />
-        ))}
-      </div>
+      {products.map((product) => (
+        <ProductCard key={product.id} product={product} isLoading={false} />
+      ))}
     </ContentContainer>
   );
 };
