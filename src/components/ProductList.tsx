@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react';
-import ProductCard from './ProductCard';
-import { getProducts } from '../api/api';
-import styled from 'styled-components';
+import React, { useEffect, useState } from "react";
+import ProductCard from "./ProductCard";
+import { getProducts } from "../api/api";
+import styled from "styled-components";
+import { useRouter } from "next/router";
 
 interface Product {
   id: number;
@@ -20,27 +21,27 @@ const ProductList: React.FC = () => {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [activeCategory, setActiveCategory] = useState<string | null>(null);
+  const router = useRouter();
 
   useEffect(() => {
+    const { query } = router;
+    const activeCategory =
+      typeof query.category === "string" ? query.category : null;
+
     const fetchData = async () => {
       try {
-        const fetchedProducts = await getProducts();
+        const fetchedProducts = await getProducts(activeCategory);
         setProducts(fetchedProducts);
       } catch (error) {
-        console.error('Error fetching data:', error);
-        setError('Error fetching data');
+        console.error("Error fetching data:", error);
+        setError("Error fetching data");
       } finally {
         setLoading(false);
       }
     };
 
     fetchData();
-  }, [activeCategory]);
-
-  const filteredProducts = activeCategory
-    ? products.filter((product) => product.category.toLowerCase() === activeCategory.toLowerCase())
-    : products;
+  }, [router.query.category]);
 
   if (loading) {
     return <p>Loading...</p>;
@@ -54,15 +55,15 @@ const ProductList: React.FC = () => {
     <ContentContainer>
       <div
         style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(4, 1fr)',
-          gap: '22px',
-          justifyContent: 'center',
-          margin: 'auto',
-          maxWidth: '1110px',
+          display: "grid",
+          gridTemplateColumns: "repeat(4, 1fr)",
+          gap: "22px",
+          justifyContent: "center",
+          margin: "auto",
+          maxWidth: "1110px",
         }}
       >
-        {filteredProducts.map((product) => (
+        {products.map((product) => (
           <ProductCard key={product.id} product={product} isLoading={false} />
         ))}
       </div>

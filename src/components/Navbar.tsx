@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { FaShoppingCart, FaBars, FaTimes } from "react-icons/fa";
+import { useRouter } from "next/router";
 
 const NavbarContainer = styled.div`
   position: fixed;
@@ -77,10 +78,20 @@ const CategoryLink = styled.a`
 
 interface NavbarProps {
   categories: string[];
+  activeCategory: string | null;
+  setActiveCategory: React.Dispatch<React.SetStateAction<string | null>>;
+  onLogout: () => void;
 }
-const Navbar: React.FC<NavbarProps> = ({ categories }) => {
+
+const Navbar: React.FC<NavbarProps> = ({
+  categories,
+  activeCategory,
+  setActiveCategory,
+  onLogout,
+  ...props
+}) => {
   const [showCategories, setShowCategories] = useState(false);
-  const [activeCategory, setActiveCategory] = useState<string | null>(null); //checar o activecategory depois!!!!!
+  const router = useRouter();
 
   const toggleCategories = () => {
     setShowCategories(!showCategories);
@@ -89,11 +100,17 @@ const Navbar: React.FC<NavbarProps> = ({ categories }) => {
   const handleCategoryClick = (category: string) => {
     setActiveCategory(category);
     setShowCategories(false);
+    router.push(`/?category=${encodeURIComponent(category)}`, undefined, {
+      shallow: true,
+    });
   };
 
   const handleLogoClick = () => {
     setActiveCategory(null);
+    router.push("/", undefined, { shallow: true });
   };
+
+  console.log(categories);
 
   return (
     <NavbarContainer>
@@ -117,6 +134,7 @@ const Navbar: React.FC<NavbarProps> = ({ categories }) => {
             {category.charAt(0).toUpperCase() + category.slice(1)}{" "}
           </CategoryLink>
         ))}
+        {onLogout && <CategoryLink onClick={onLogout}>Logout</CategoryLink>}
       </CategoriesContainer>
     </NavbarContainer>
   );
