@@ -13,9 +13,9 @@ A Mock Store foi idealizada á partir de um desafio técnico e tem como principa
 
 ## Tecnologias Utilizadas 🚀
 
-- **React (Next.js):** https://skillicons.dev/icons?i=nextjs
-- **TypeScript:** https://skillicons.dev/icons?i=typescript
-- **Styled Components:** https://skillicons.dev/icons?i=css
+- **React (Next.js):**   <img src="https://skillicons.dev/icons?i=nextjs">
+- **TypeScript:**   <img src="https://skillicons.dev/icons?i=typescript">
+- **Styled Components:**   <img src="https://skillicons.dev/icons?i=css">
 
 ## Como Iniciar 🚀
 
