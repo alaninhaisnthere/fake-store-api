@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import Logo from "../assets/logo.svg"
+import Logo from "../assets/logo.svg";
 import Image from "next/image";
 
 const LoginContainer = styled.div`
@@ -27,23 +27,23 @@ const RightSection = styled.div`
 const LoginForm = styled.form`
   display: flex;
   flex-direction: column;
-  align-items: center;
-  width: 60%;
+  align-items: flex-start;
+  width: 40%;
   padding: 20px;
   background-color: #fff;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
 `;
 
-const Title = styled.h1`
-  font-family: 'inter', sans-serif;
+const Title = styled.div`
+  font-family: "Inter", sans-serif;
   font-weight: bold;
-  font-size: 56px;
+  font-size: 46px;
   margin-bottom: 20px;
-  color: #1F3E82;
+  color: #000000;
 `;
 
 const Subtitle = styled.p`
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   font-weight: 400;
   font-size: 16px;
   color: rgba(0, 0, 0, 0.5);
@@ -51,19 +51,37 @@ const Subtitle = styled.p`
 `;
 
 const InputField = styled.input`
-  margin-bottom: 10px;
+  margin-bottom: 20px;
   padding: 8px;
-  border: 1px solid #ccc;
+  border: none;
+  background-color: #fbce2d5d;
+  width: 50%;
   border-radius: 4px;
+  font-family: "Poppins", sans-serif;
+  font-weight: 300;
+  font-size: 16px;
+`;
+
+const Label = styled.label`
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  margin-bottom: 8px;
 `;
 
 const SubmitButton = styled.button`
-  padding: 10px;
-  background-color: #1F3E82;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding: 10px 20px;
+  background-color: #1f3e82;
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
   color: #fff;
   border: none;
-  border-radius: 4px;
+  border-radius: 23px;
   cursor: pointer;
+  align-self: center;
+  width: 150px;
 `;
 
 interface LoginProps {
@@ -83,25 +101,29 @@ const Login: React.FC<LoginProps> = ({ onLogin }) => {
     <LoginContainer>
       <LeftSection>
         <LoginForm onSubmit={handleSubmit}>
-          <Title>Sign in</Title>
           <Subtitle>Welcome back!</Subtitle>
+          <Title>Sign in</Title>
+          <Label htmlFor="email">Email</Label>
           <InputField
             type="email"
-            placeholder="Email"
+            id="email"
+            placeholder="user@email.com"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
+          <Label htmlFor="password">Password</Label>
           <InputField
             type="password"
-            placeholder="Password"
+            id="password"
+            placeholder="***********"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-          <SubmitButton type="submit">Login</SubmitButton>
+          <SubmitButton type="submit">LOGIN</SubmitButton>
         </LoginForm>
       </LeftSection>
       <RightSection>
-        <Image src={Logo} alt="Logo" />
+        <Image src={Logo} alt="Logo" width={400} height={400} />
       </RightSection>
     </LoginContainer>
   );
