@@ -71,7 +71,7 @@ const Description = styled.p`
 `;
 
 const BottomSection = styled.div`
-  background-color: #fa997d;
+  background-color: #1F3E82;
   height: 32px;
   width: 100%;
   cursor: pointer;

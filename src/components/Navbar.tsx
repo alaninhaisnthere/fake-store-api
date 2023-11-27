@@ -2,12 +2,14 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { FaShoppingCart, FaBars, FaTimes } from "react-icons/fa";
 import { useRouter } from "next/router";
+import Image from "next/image";
+import LogoImage from "../assets/logo.svg";
 
 const NavbarContainer = styled.div`
   position: fixed;
-  background-color: #fa997d;
-  color: #fff;
-  padding: 10px;
+  background-color: #fbd02d;
+  color: #000000;
+  padding: 15px;
   margin-bottom: 20px;
   display: flex;
   justify-content: space-between;
@@ -16,9 +18,9 @@ const NavbarContainer = styled.div`
   z-index: 1000;
 `;
 
-const Logo = styled.h1`
-  font-size: 24px;
-  margin-right: 20px;
+const Logo = styled.div`
+  height: 40px;
+  cursor: pointer;
 `;
 
 const SearchContainer = styled.div`
@@ -114,7 +116,9 @@ const Navbar: React.FC<NavbarProps> = ({
 
   return (
     <NavbarContainer>
-      <Logo onClick={handleLogoClick}>FakeStore</Logo>
+      <Logo>
+        <Image width={95} src={LogoImage} alt="Logo" />
+      </Logo>
       <SearchContainer>
         <SearchInput type="text" placeholder="Search products..." />
         <CartButton>
