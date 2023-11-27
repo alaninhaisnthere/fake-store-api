@@ -65,19 +65,27 @@ const CategoriesContainer = styled.div<{ showCategories: boolean }>`
   }
 `;
 
-const CategoryLink = styled.a`
-  color: #000000;
+const CategoryLink = styled.a<{ isLogout?: boolean }>`
+  color: ${(props) => (props.isLogout ? "#fff" : "#000000")};
   text-decoration: none;
   margin-top: 5px;
   font-size: 16px;
-  background-color: #fbd02d;
+  background-color: ${(props) => (props.isLogout ? "#1F3E82" : "#fbd02d")};
   font-weight: bold;
   margin-right: 10px;
   padding: 5px 10px;
   border-radius: 5px;
-  color: #000;
+  cursor: pointer;
+
   &:hover {
-    text-decoration: underline;
+    text-decoration: none;
+    background-color: ${(props) => (props.isLogout ? "#F47458" : "#F47458")};
+  }
+`;
+
+const LogoutCategoryLink = styled(CategoryLink)`
+  &:hover {
+    background-color: #881e06;
   }
 `;
 
@@ -186,7 +194,11 @@ const Navbar: React.FC<NavbarProps> = ({
             {category.charAt(0).toUpperCase() + category.slice(1)}{" "}
           </CategoryLink>
         ))}
-        {onLogout && <CategoryLink onClick={onLogout}>Logout</CategoryLink>}
+        {onLogout && (
+          <LogoutCategoryLink isLogout onClick={onLogout}>
+            Logout
+          </LogoutCategoryLink>
+        )}
       </CategoriesContainer>
     </NavbarContainer>
   );
