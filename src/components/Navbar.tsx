@@ -4,6 +4,7 @@ import { FaShoppingCart, FaBars, FaTimes } from "react-icons/fa";
 import { useRouter } from "next/router";
 import Image from "next/image";
 import LogoImage from "../assets/logo.svg";
+import Link from "next/link";
 
 const Logo = styled.div`
   height: 40px;
@@ -173,7 +174,9 @@ const Navbar: React.FC<NavbarProps> = ({
   return (
     <NavbarContainer>
       <Logo>
-        <Image width={95} src={LogoImage} alt="Logo" />
+        <Link href="/">
+          <Image width={95} src={LogoImage} alt="Logo" />
+        </Link>
       </Logo>
       <SearchContainer>
         <SearchInput type="text" placeholder="Search products..." />

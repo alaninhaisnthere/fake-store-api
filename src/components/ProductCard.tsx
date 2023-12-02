@@ -41,7 +41,12 @@ const Image = styled.div`
   background-color: #ccc;
   border-radius: 8px;
   background-size: cover;
-  background-position: center;
+  background-position: top;
+  transition: transform 0.3s ease-in-out;
+
+  &:hover {
+    transform: scale(1.1);
+  }
 
   @media (max-width: 768px) {
     height: 200px;
@@ -85,7 +90,7 @@ const Description = styled.p`
 `;
 
 const BottomSection = styled.div`
-  background-color: #1F3E82;
+  background-color: #1f3e82;
   height: 32px;
   width: 100%;
   cursor: pointer;
@@ -94,6 +99,11 @@ const BottomSection = styled.div`
   align-items: center;
   border-bottom-left-radius: 8px;
   border-bottom-right-radius: 8px;
+  transition: background-color 0.2s ease-in-out;
+
+  &:hover {
+    background-color: #F47458;
+  }
 
   @media (max-width: 768px) {
     height: 50px;

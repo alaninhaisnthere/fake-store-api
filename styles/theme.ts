@@ -10,6 +10,6 @@ export const resetStyles = createGlobalStyle`
   }
 
   body {
-    font-family: 'Arial', sans-serif; /* Escolha a fonte desejada */
+    font-family: 'Arial', sans-serif;
   }
 `;
