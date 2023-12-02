@@ -20,7 +20,7 @@ const ContentContainer = styled.div`
   justify-content: center;
   margin: auto;
   max-width: 1110px;
-  
+
   @media (max-width: 768px) {
     grid-template-columns: 1fr;
   }
@@ -40,7 +40,11 @@ const ProductList: React.FC = () => {
     const { query } = router;
 
     const activeCategory =
-      typeof query.category === "string" ? query.category : undefined;
+      typeof query.category === "string"
+        ? query.category.toLowerCase() === "jewelry"
+          ? "jewelery"
+          : query.category.toLowerCase()
+        : undefined;
 
     const fetchData = async () => {
       try {
