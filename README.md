@@ -2,20 +2,20 @@
 
 ## Descrição 📄
 
-A Mock Store foi idealizada á partir de um desafio técnico e tem como principal objetivo a prática e demonstração habilidades em React (usando o Next.js), TypeScript e consumo de API (https://fakestoreapi.com/).
+A Mock Store foi idealizada á partir de um desafio técnico e tem como principal objetivo a prática e demonstração de habilidades em React (usando o Next.js), TypeScript e consumo de API (https://fakestoreapi.com/).
 
 ## Funcionalidades ✨
 
 - **Listagem de Produtos:** Visualização de todos os produtos disponibilizados pela API.
-- **Detalhes do Produto:** Detalhes sobre cada produto, incluindo preço e descrição.
-- **Carrinho de Compras:** Adicione produtos ao carrinho e veja um resumo dos itens selecionados.
+- **Detalhes do Produto:** Detalhes sobre cada produto, incluindo preço e descrição. (Em progresso)
+- **Carrinho de Compras:** Adicione produtos ao carrinho e veja um resumo dos itens selecionados. (Em progresso)
 - **Responsivo:** Experiência adaptada para dispositivos móveis e desktop.
 
 ## Tecnologias Utilizadas 🚀
 
-- **React (Next.js):**   <img src="https://skillicons.dev/icons?i=nextjs">
-- **TypeScript:**   <img src="https://skillicons.dev/icons?i=typescript">
-- **Styled Components:**   <img src="https://skillicons.dev/icons?i=css">
+- <img src="https://skillicons.dev/icons?i=nextjs"> **React (Next.js)**
+- <img src="https://skillicons.dev/icons?i=typescript"> **TypeScript**
+- <img src="https://skillicons.dev/icons?i=css"> **Styled Components**
 
 ## Como Iniciar 🚀
 
