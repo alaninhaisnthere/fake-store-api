@@ -35,24 +35,46 @@ const CardContainer = styled.div<CardContainerProps>`
   }
 `;
 
-const Image = styled.div`
-  width: 100%;
-  height: 0;
-  padding-top: 75%;
-  background-color: #ccc;
-  border-radius: 8px;
-  background-size: cover;
-  background-position: top;
+const ImageContainer = styled.div`
+  width: 200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const Image = styled.img`
+  max-height: 160px;
   transition: transform 0.3s ease-in-out;
 
-  &:hover {
+  ${ImageContainer}:hover & {
     transform: scale(1.1);
   }
 
   @media (max-width: 768px) {
-    height: 200px;
+    max-height: 100px; /* Adjust the height for responsiveness */
   }
 `;
+
+// const Image = styled.div`
+//   width: 100%;
+//   height: 0;
+//   max-height: 160px;
+//   padding-top: 75%;
+//   background-color: #ccc;
+//   border-radius: 8px;
+//   background-size: cover;
+//   background-position: top;
+//   transition: transform 0.3s ease-in-out;
+
+//   &:hover {
+//     transform: scale(1.1);
+//   }
+
+//   @media (max-width: 768px) {
+//     height: 200px;
+//   }
+// `;
 
 const ProductInfo = styled.div`
   padding: 16px;
@@ -143,15 +165,18 @@ const ProductCard: React.FC<ProductCardProps> = ({
 }) => {
   const truncatedTitle = product ? truncateText(product.title, 25) : "";
   const productDescription = product?.description || "Loading...";
+
   const handleAddToCart = () => {
+    console.log("Adding to cart:", product);
     if (product) {
       setCartItems((prevItems) => [...prevItems, product]);
     }
   };
-
   return (
     <CardContainer isLoading={isLoading}>
-      <Image style={{ backgroundImage: `url(${product?.image})` }} />
+    <ImageContainer>
+      <Image src={product?.image} alt={truncatedTitle} />
+    </ImageContainer>
       <ProductInfo>
         <Name>{isLoading ? "Loading..." : truncatedTitle}</Name>
         <PriceWrapper>

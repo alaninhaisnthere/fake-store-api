@@ -21,10 +21,10 @@ const CartContainer = styled.div`
 `;
 
 const Cart = ({ cartItems }: { cartItems: Product[] }) => {
-  return
-  <CartContainer>
-  <CartPage cartItems={cartItems} />;
-  </CartContainer>
-};
-
+    return (
+      <CartContainer>
+        <CartPage cartItems={cartItems} />
+      </CartContainer>
+    );
+  };
 export default Cart;
