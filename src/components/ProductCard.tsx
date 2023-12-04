@@ -1,5 +1,6 @@
 import React from "react";
 import styled, { keyframes } from "styled-components";
+import { Product } from "../types/types";
 
 interface CardContainerProps {
   isLoading?: boolean;
@@ -102,7 +103,7 @@ const BottomSection = styled.div`
   transition: background-color 0.2s ease-in-out;
 
   &:hover {
-    background-color: #F47458;
+    background-color: #f47458;
   }
 
   @media (max-width: 768px) {
@@ -122,13 +123,9 @@ const BuyButton = styled.button`
 
 interface ProductCardProps {
   isLoading?: boolean;
-  product?: {
-    id: number;
-    title: string;
-    price: string;
-    description: string;
-    image: string;
-  };
+  product?: Product;
+  cartItems: Product[];
+  setCartItems: React.Dispatch<React.SetStateAction<Product[]>>;
 }
 
 const truncateText = (text: string, maxLength: number): string => {
@@ -141,9 +138,16 @@ const truncateText = (text: string, maxLength: number): string => {
 const ProductCard: React.FC<ProductCardProps> = ({
   isLoading = false,
   product,
+  cartItems,
+  setCartItems,
 }) => {
   const truncatedTitle = product ? truncateText(product.title, 25) : "";
   const productDescription = product?.description || "Loading...";
+  const handleAddToCart = () => {
+    if (product) {
+      setCartItems((prevItems) => [...prevItems, product]);
+    }
+  };
 
   return (
     <CardContainer isLoading={isLoading}>
@@ -158,7 +162,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
         </Description>
       </ProductInfo>
       <BottomSection>
-        <BuyButton>Buy it!</BuyButton>
+        <BuyButton onClick={handleAddToCart}>Add to cart +</BuyButton>
       </BottomSection>
     </CardContainer>
   );

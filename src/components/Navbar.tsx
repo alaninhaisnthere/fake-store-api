@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 import Image from "next/image";
 import LogoImage from "../assets/logo.svg";
 import Link from "next/link";
+import { Product } from "../types/types";
 
 const Logo = styled.div`
   height: 40px;
@@ -101,6 +102,7 @@ const NavbarContainer = styled.div`
   align-items: center;
   width: 100%;
   z-index: 1000;
+  margin-top: 0;
 
   @media (max-width: 768px) {
     flex-direction: row;
@@ -139,6 +141,7 @@ interface NavbarProps {
   categories: string[];
   activeCategory: string | null;
   setActiveCategory: React.Dispatch<React.SetStateAction<string | null>>;
+  cartItems: Product[];
   onLogout: () => void;
 }
 
@@ -146,6 +149,7 @@ const Navbar: React.FC<NavbarProps> = ({
   categories,
   activeCategory,
   setActiveCategory,
+  cartItems,
   onLogout,
   ...props
 }) => {
@@ -169,18 +173,27 @@ const Navbar: React.FC<NavbarProps> = ({
     router.push("/", undefined, { shallow: true });
   };
 
+  const handleCartClick = () => {
+    router.push("/cart");
+  };
+
   console.log(categories);
 
   return (
     <NavbarContainer>
       <Logo>
         <Link href="/">
-          <Image width={95} src={LogoImage} alt="Logo" />
+          <Image
+            width={95}
+            src={LogoImage}
+            alt="Logo"
+            onClick={handleLogoClick}
+          />
         </Link>
       </Logo>
       <SearchContainer>
         <SearchInput type="text" placeholder="Search products..." />
-        <CartButton>
+        <CartButton onClick={handleCartClick}>
           <FaShoppingCart />
         </CartButton>{" "}
       </SearchContainer>

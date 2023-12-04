@@ -1,14 +1,17 @@
 import axios from "axios";
+import { Product } from "../types/types";
 
 const API_BASE_URL = "https://fakestoreapi.com";
 
 export const getProducts = async (category?: string): Promise<any> => {
   try {
-    const url = category ? `${API_BASE_URL}/products/category/${category}` : `${API_BASE_URL}/products`;
+    const url = category
+      ? `${API_BASE_URL}/products/category/${category}`
+      : `${API_BASE_URL}/products`;
     const response = await axios.get(url);
 
     if (response.data && Array.isArray(response.data)) {
-      return response.data;
+      return response.data as Product[];
     } else {
       throw new Error("Invalid response format");
     }

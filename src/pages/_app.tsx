@@ -2,14 +2,15 @@ import React, { useState, useEffect } from "react";
 import { AppProps } from "next/app";
 import Navbar from "../components/Navbar";
 import Login from "../components/Login";
-import { getAllUsers } from "../api/api";
+import { getAllUsers, getProducts } from "../api/api";
 import { Helmet } from "react-helmet";
-
 import GlobalStyles from "../components/GlobalStyles";
+import { Product } from "../types/types";
 
 function MyApp({ Component, pageProps }: AppProps) {
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [cartItems, setCartItems] = useState<Product[]>([]);
 
   const handleLogin = async (email: string, password: string) => {
     try {
@@ -63,9 +64,16 @@ function MyApp({ Component, pageProps }: AppProps) {
           activeCategory={activeCategory}
           setActiveCategory={setActiveCategory}
           onLogout={handleLogout}
+          cartItems={cartItems}
         />
       )}
-      {isLoggedIn && <Component {...pageProps} />}
+      {isLoggedIn && (
+        <Component
+          {...pageProps}
+          cartItems={cartItems}
+          setCartItems={setCartItems}
+        />
+      )}
       {!isLoggedIn && <Login onLogin={handleLogin} />}
       <GlobalStyles />
     </>

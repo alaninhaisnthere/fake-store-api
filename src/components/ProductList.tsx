@@ -1,16 +1,13 @@
-import React, { useEffect, useState } from "react";
-import ProductCard from "./ProductCard";
-import { getProducts } from "../api/api";
-import styled from "styled-components";
-import { useRouter } from "next/router";
+import React, { useEffect, useState } from 'react';
+import ProductCard from './ProductCard';
+import { getProducts } from '../api/api';
+import styled from 'styled-components';
+import { useRouter } from 'next/router';
+import { Product } from '../types/types';
 
-interface Product {
-  id: number;
-  title: string;
-  price: string;
-  description: string;
-  image: string;
-  category: string;
+interface ProductListProps {
+  cartItems: Product[];
+  setCartItems: React.Dispatch<React.SetStateAction<Product[]>>;
 }
 
 const ContentContainer = styled.div`
@@ -30,7 +27,7 @@ const ContentContainer = styled.div`
   }
 `;
 
-const ProductList: React.FC = () => {
+const ProductList: React.FC<ProductListProps> = ({ cartItems, setCartItems }) => {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -40,9 +37,9 @@ const ProductList: React.FC = () => {
     const { query } = router;
 
     const activeCategory =
-      typeof query.category === "string"
-        ? query.category.toLowerCase() === "jewelry"
-          ? "jewelery"
+      typeof query.category === 'string'
+        ? query.category.toLowerCase() === 'jewelry'
+          ? 'jewelery'
           : query.category.toLowerCase()
         : undefined;
 
@@ -51,8 +48,8 @@ const ProductList: React.FC = () => {
         const fetchedProducts = await getProducts(activeCategory);
         setProducts(fetchedProducts);
       } catch (error) {
-        console.error("Error fetching data:", error);
-        setError("Error fetching data");
+        console.error('Error fetching data:', error);
+        setError('Error fetching data');
       } finally {
         setLoading(false);
       }
@@ -72,7 +69,12 @@ const ProductList: React.FC = () => {
   return (
     <ContentContainer>
       {products.map((product) => (
-        <ProductCard key={product.id} product={product} isLoading={false} />
+        <ProductCard
+          key={product.id}
+          product={product}
+          cartItems={cartItems}
+          setCartItems={setCartItems}
+        />
       ))}
     </ContentContainer>
   );
