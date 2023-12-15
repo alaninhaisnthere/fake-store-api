@@ -6,15 +6,6 @@ interface CardContainerProps {
   isLoading?: boolean;
 }
 
-const shimmer = keyframes`
-  0% {
-    background-position: -200% 0;
-  }
-  100% {
-    background-position: 200% 0;
-  }
-`;
-
 const CardContainer = styled.div<CardContainerProps>`
   width: auto;
   height: auto;
@@ -37,6 +28,7 @@ const CardContainer = styled.div<CardContainerProps>`
 
 const ImageContainer = styled.div`
   width: 200px;
+  height: 200px;
   margin: 0 auto;
   display: flex;
   justify-content: center;
@@ -52,29 +44,9 @@ const Image = styled.img`
   }
 
   @media (max-width: 768px) {
-    max-height: 100px; /* Adjust the height for responsiveness */
+    max-height: 100px
   }
 `;
-
-// const Image = styled.div`
-//   width: 100%;
-//   height: 0;
-//   max-height: 160px;
-//   padding-top: 75%;
-//   background-color: #ccc;
-//   border-radius: 8px;
-//   background-size: cover;
-//   background-position: top;
-//   transition: transform 0.3s ease-in-out;
-
-//   &:hover {
-//     transform: scale(1.1);
-//   }
-
-//   @media (max-width: 768px) {
-//     height: 200px;
-//   }
-// `;
 
 const ProductInfo = styled.div`
   padding: 16px;
@@ -85,7 +57,7 @@ const ProductInfo = styled.div`
 `;
 
 const Name = styled.h3`
-  font-size: 16px;
+  font-size: 18px;
   font-weight: normal;
   margin-bottom: 8px;
   font-family: "Montserrat", sans-serif;
@@ -106,7 +78,7 @@ const Price = styled.span`
 `;
 
 const Description = styled.p`
-  font-size: 10px;
+  font-size: 12px;
   color: #777;
   margin-bottom: 16px;
   font-family: "Montserrat", sans-serif;
@@ -150,6 +122,7 @@ interface ProductCardProps {
   setCartItems: React.Dispatch<React.SetStateAction<Product[]>>;
 }
 
+
 const truncateText = (text: string, maxLength: number): string => {
   if (text.length <= maxLength) {
     return text;
@@ -164,33 +137,36 @@ const ProductCard: React.FC<ProductCardProps> = ({
   setCartItems,
 }) => {
   const truncatedTitle = product ? truncateText(product.title, 25) : "";
-  const productDescription = product?.description || "Loading...";
+  const truncatedDescription = product
+    ? truncateText(product.description || "", 50) 
+    : "Loading...";
 
-  const handleAddToCart = () => {
-    console.log("Adding to cart:", product);
-    if (product) {
-      setCartItems((prevItems) => [...prevItems, product]);
-    }
+    const handleAddToCart = () => {
+      console.log("Adding to cart:", product);
+      if (product) {
+        setCartItems((prevItems) => [...prevItems, product]);
+      }
+    };
+  
+    return (
+      <CardContainer isLoading={isLoading}>
+        <ImageContainer>
+          <Image src={product?.image} alt={truncatedTitle} />
+        </ImageContainer>
+        <ProductInfo>
+          <Name>{isLoading ? "Loading..." : truncatedTitle}</Name>
+          <PriceWrapper>
+            <Price>{isLoading ? "Loading..." : `R$ ${product?.price}`}</Price>
+          </PriceWrapper>
+          <Description>
+            {isLoading ? "Loading..." : truncatedDescription}
+          </Description>
+        </ProductInfo>
+        <BottomSection>
+          <BuyButton onClick={handleAddToCart}>Add to cart +</BuyButton>
+        </BottomSection>
+      </CardContainer>
+    );
   };
-  return (
-    <CardContainer isLoading={isLoading}>
-    <ImageContainer>
-      <Image src={product?.image} alt={truncatedTitle} />
-    </ImageContainer>
-      <ProductInfo>
-        <Name>{isLoading ? "Loading..." : truncatedTitle}</Name>
-        <PriceWrapper>
-          <Price>{isLoading ? "Loading..." : `R$ ${product?.price}`}</Price>
-        </PriceWrapper>
-        <Description>
-          {isLoading ? "Loading..." : productDescription}
-        </Description>
-      </ProductInfo>
-      <BottomSection>
-        <BuyButton onClick={handleAddToCart}>Add to cart +</BuyButton>
-      </BottomSection>
-    </CardContainer>
-  );
-};
-
-export default ProductCard;
+  
+  export default ProductCard;

@@ -20,11 +20,11 @@ const CartContainer = styled.div`
   }
 `;
 
-const Cart = ({ cartItems }: { cartItems: Product[] }) => {
-    return (
-      <CartContainer>
-        <CartPage cartItems={cartItems} />
-      </CartContainer>
-    );
-  };
+const Cart = ({ cartItems, setCartItems }: { cartItems: Product[]; setCartItems: React.Dispatch<React.SetStateAction<Product[]>> }) => {
+  return (
+    <CartContainer>
+      <CartPage cartItems={cartItems}/>
+    </CartContainer>
+  );
+};
 export default Cart;

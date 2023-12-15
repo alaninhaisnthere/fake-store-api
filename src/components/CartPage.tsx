@@ -6,6 +6,10 @@ interface CartPageProps {
 }
 
 const CartPage: React.FC<CartPageProps> = ({ cartItems }) => {
+  if (cartItems.length === 0) {
+    return <div>Empty cart</div>;
+  }
+
   return (
     <div>
       <ul>
