@@ -93,7 +93,7 @@ const LogoutCategoryLink = styled(CategoryLink)`
 
 const NavbarContainer = styled.div`
   position: fixed;
-  background-color: #fbd02d;
+  background-color: #BDB0D6;
   color: #000000;
   padding: 15px;
   margin-bottom: 20px;
