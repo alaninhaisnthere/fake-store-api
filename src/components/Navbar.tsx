@@ -201,15 +201,19 @@ const Navbar: React.FC<NavbarProps> = ({
         {showCategories ? <FaTimes /> : <FaBars />}
       </CategoriesToggle>
       <CategoriesContainer showCategories={showCategories}>
-        {categories.map((category) => (
-          <CategoryLink
-            key={category}
-            href={`#${category}`}
-            onClick={() => handleCategoryClick(category)}
-          >
-            {category.charAt(0).toUpperCase() + category.slice(1)}{" "}
-          </CategoryLink>
-        ))}
+        {categories
+          .filter(
+            (category) => category !== "electronics" && category !== "joalheria"
+          )
+          .map((category) => (
+            <CategoryLink
+              key={category}
+              href={`#${category}`}
+              onClick={() => handleCategoryClick(category)}
+            >
+              {category.charAt(0).toUpperCase() + category.slice(1)}{" "}
+            </CategoryLink>
+          ))}
         {onLogout && (
           <LogoutCategoryLink isLogout onClick={onLogout}>
             Logout

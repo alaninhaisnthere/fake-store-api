@@ -43,17 +43,20 @@ const ProductList: React.FC<ProductListProps> = ({ cartItems, setCartItems }) =>
           : query.category.toLowerCase()
         : undefined;
 
-    const fetchData = async () => {
-      try {
-        const fetchedProducts = await getProducts(activeCategory);
-        setProducts(fetchedProducts);
-      } catch (error) {
-        console.error('Error fetching data:', error);
-        setError('Error fetching data');
-      } finally {
-        setLoading(false);
-      }
-    };
+        const fetchData = async () => {
+          try {
+            const fetchedProducts = await getProducts(activeCategory);
+            const filteredProducts = fetchedProducts.filter(
+              (product: { category: string; }) => product.category !== 'electronics' && product.category !== 'jewelery'
+            );
+            setProducts(filteredProducts);
+          } catch (error) {
+            console.error('Error fetching data:', error);
+            setError('Error fetching data');
+          } finally {
+            setLoading(false);
+          }
+        };
 
     fetchData();
   }, [router.query.category]);

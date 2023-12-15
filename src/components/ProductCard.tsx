@@ -141,32 +141,38 @@ const ProductCard: React.FC<ProductCardProps> = ({
     ? truncateText(product.description || "", 50) 
     : "Loading...";
 
-    const handleAddToCart = () => {
-      console.log("Adding to cart:", product);
-      if (product) {
-        setCartItems((prevItems) => [...prevItems, product]);
-      }
-    };
-  
-    return (
-      <CardContainer isLoading={isLoading}>
-        <ImageContainer>
-          <Image src={product?.image} alt={truncatedTitle} />
-        </ImageContainer>
-        <ProductInfo>
-          <Name>{isLoading ? "Loading..." : truncatedTitle}</Name>
-          <PriceWrapper>
-            <Price>{isLoading ? "Loading..." : `R$ ${product?.price}`}</Price>
-          </PriceWrapper>
-          <Description>
-            {isLoading ? "Loading..." : truncatedDescription}
-          </Description>
-        </ProductInfo>
-        <BottomSection>
-          <BuyButton onClick={handleAddToCart}>Add to cart +</BuyButton>
-        </BottomSection>
-      </CardContainer>
-    );
+  const handleAddToCart = () => {
+    console.log("Adding to cart:", product);
+    if (product) {
+      setCartItems((prevItems) => [...prevItems, product]);
+    }
   };
-  
-  export default ProductCard;
+
+  const formattedPrice = isLoading
+  ? "Loading..."
+  : product
+  ? `R$ ${(product.price as unknown as number).toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`
+  : "";
+
+  return (
+    <CardContainer isLoading={isLoading}>
+      <ImageContainer>
+        <Image src={product?.image} alt={truncatedTitle} />
+      </ImageContainer>
+      <ProductInfo>
+        <Name>{isLoading ? "Loading..." : truncatedTitle}</Name>
+        <PriceWrapper>
+          <Price>{formattedPrice}</Price>
+        </PriceWrapper>
+        <Description>
+          {isLoading ? "Loading..." : truncatedDescription}
+        </Description>
+      </ProductInfo>
+      <BottomSection>
+        <BuyButton onClick={handleAddToCart}>Add to cart +</BuyButton>
+      </BottomSection>
+    </CardContainer>
+  );
+};
+
+export default ProductCard;
