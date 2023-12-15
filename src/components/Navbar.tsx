@@ -68,11 +68,11 @@ const CategoriesContainer = styled.div<{ showCategories: boolean }>`
 `;
 
 const CategoryLink = styled.a<{ isLogout?: boolean }>`
-  color: ${(props) => (props.isLogout ? "#fff" : "#000000")};
+  color: ${(props) => (props.isLogout ? "#fff" : "#fafafafa")};
   text-decoration: none;
   margin-top: 5px;
   font-size: 16px;
-  background-color: ${(props) => (props.isLogout ? "#1F3E82" : "#fbd02d")};
+  background-color: ${(props) => (props.isLogout ? "#F44E3F" : "#553E4E")};
   font-weight: bold;
   margin-right: 10px;
   padding: 5px 10px;
@@ -81,7 +81,7 @@ const CategoryLink = styled.a<{ isLogout?: boolean }>`
 
   &:hover {
     text-decoration: none;
-    background-color: ${(props) => (props.isLogout ? "#F47458" : "#F47458")};
+    background-color: ${(props) => (props.isLogout ? "#F47458" : "#BDB0D6")};
   }
 `;
 
@@ -93,7 +93,7 @@ const LogoutCategoryLink = styled(CategoryLink)`
 
 const NavbarContainer = styled.div`
   position: fixed;
-  background-color: #BDB0D6;
+  background-color: #bdb0d6;
   color: #000000;
   padding: 15px;
   margin-bottom: 20px;
@@ -203,7 +203,8 @@ const Navbar: React.FC<NavbarProps> = ({
       <CategoriesContainer showCategories={showCategories}>
         {categories
           .filter(
-            (category) => category !== "electronics" && category !== "joalheria"
+            (category) =>
+              category === "men's clothing" || category === "women's clothing"
           )
           .map((category) => (
             <CategoryLink
