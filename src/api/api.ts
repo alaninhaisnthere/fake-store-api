@@ -30,3 +30,13 @@ export const getAllUsers = async (): Promise<any> => {
     throw error;
   }
 };
+
+export const getUserCart = async (userId: number): Promise<any> => {
+  try {
+    const response = await axios.get(`${API_BASE_URL}/carts/user/${userId}`);
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching user cart:", error);
+    throw error;
+  }
+};

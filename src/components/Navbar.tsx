@@ -93,7 +93,7 @@ const LogoutCategoryLink = styled(CategoryLink)`
 
 const NavbarContainer = styled.div`
   position: fixed;
-  background-color: #bdb0d6;
+  background-color: #FBD02D;
   color: #000000;
   padding: 15px;
   margin-bottom: 20px;
@@ -176,8 +176,6 @@ const Navbar: React.FC<NavbarProps> = ({
   const handleCartClick = () => {
     router.push("/cart");
   };
-
-  console.log(categories);
 
   return (
     <NavbarContainer>

@@ -1,16 +1,21 @@
-import React, { useState, useEffect } from "react";
-import { AppProps } from "next/app";
-import Navbar from "../components/Navbar";
-import Login from "../components/Login";
-import { getAllUsers, getProducts } from "../api/api";
-import { Helmet } from "react-helmet";
-import GlobalStyles from "../components/GlobalStyles";
-import { Product } from "../types/types";
+import React, { useState, useEffect } from 'react';
+import { AppProps } from 'next/app';
+import Navbar from '../components/Navbar';
+import Login from '../components/Login';
+import { getAllUsers } from '../api/api';
+import { Helmet } from 'react-helmet';
+import GlobalStyles from '../components/GlobalStyles';
+import { Product } from '../types/types';
+import { CartProvider } from '../context/CartContext';
 
-function MyApp({ Component, pageProps }: AppProps) {
+interface MyAppProps extends AppProps {
+  cartItems: Product[];
+  setCartItems: React.Dispatch<React.SetStateAction<Product[]>>;
+}
+
+function MyApp({ Component, pageProps, cartItems, setCartItems }: MyAppProps) {
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [cartItems, setCartItems] = useState<Product[]>([]);
 
   const handleLogin = async (email: string, password: string) => {
     try {
@@ -22,61 +27,57 @@ function MyApp({ Component, pageProps }: AppProps) {
 
       if (authenticatedUser) {
         setIsLoggedIn(true);
-        localStorage.setItem("isLoggedIn", "true");
+        localStorage.setItem('isLoggedIn', 'true');
       } else {
-        alert("Credenciais inválidas");
+        alert('Credenciais inválidas');
       }
     } catch (error) {
-      console.error("Erro ao fazer login:", error);
+      console.error('Erro ao fazer login:', error);
     }
   };
 
   const handleLogout = () => {
     setIsLoggedIn(false);
-    localStorage.removeItem("isLoggedIn");
+    localStorage.removeItem('isLoggedIn');
   };
 
   useEffect(() => {
-    const userIsLoggedIn = localStorage.getItem("isLoggedIn") === "true";
+    const userIsLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
     setIsLoggedIn(userIsLoggedIn);
   }, []);
 
   return (
-    <>
-      <Helmet>
-        <link
-          href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap"
-          rel="stylesheet"
-        />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap"
-          rel="stylesheet"
-        />
-      </Helmet>
-      {isLoggedIn && (
-        <Navbar
-          categories={[
-            "electronics",
-            "jewelry",
-            "men's clothing",
-            "women's clothing",
-          ]}
-          activeCategory={activeCategory}
-          setActiveCategory={setActiveCategory}
-          onLogout={handleLogout}
-          cartItems={cartItems}
-        />
-      )}
-      {isLoggedIn && (
-        <Component
-          {...pageProps}
-          cartItems={cartItems}
-          setCartItems={setCartItems}
-        />
-      )}
-      {!isLoggedIn && <Login onLogin={handleLogin} />}
-      <GlobalStyles />
-    </>
+    <CartProvider cartItems={cartItems} setCartItems={setCartItems}>
+      <>
+        <Helmet>
+          <link
+            href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap"
+            rel="stylesheet"
+          />
+          <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap"
+            rel="stylesheet"
+          />
+        </Helmet>
+        {isLoggedIn && (
+          <Navbar
+            categories={[
+              'electronics',
+              'jewelry',
+              "men's clothing",
+              "women's clothing",
+            ]}
+            activeCategory={activeCategory}
+            setActiveCategory={setActiveCategory}
+            onLogout={handleLogout}
+            cartItems={cartItems}
+          />
+        )}
+        {isLoggedIn && <Component {...pageProps} />}
+        {!isLoggedIn && <Login onLogin={handleLogin} />}
+        <GlobalStyles />
+      </>
+    </CartProvider>
   );
 }
 
