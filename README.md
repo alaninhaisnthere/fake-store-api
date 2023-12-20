@@ -1,15 +1,23 @@
-# Mock Store 🛍️
+# Fake Store 🛍️
 
 ## Descrição 📄
 
-A Mock Store foi idealizada á partir de um desafio técnico e tem como principal objetivo a prática e demonstração de habilidades em React (usando o Next.js), TypeScript e consumo de API (https://fakestoreapi.com/).
+A Fake Store foi idealizada á partir de um desafio técnico proposto por uma empresa fictícia e tem como principal objetivo a prática e demonstração de habilidades em React (usando o Next.js), TypeScript e consumo de API (https://fakestoreapi.com/).
 
 ## Funcionalidades ✨
 
-- **Listagem de Produtos:** Visualização de todos os produtos disponibilizados pela API.
-- **Detalhes do Produto:** Detalhes sobre cada produto, incluindo preço e descrição. (Em progresso)
-- **Carrinho de Compras:** Adicione produtos ao carrinho e veja um resumo dos itens selecionados. (Em progresso)
-- **Responsivo:** Experiência adaptada para dispositivos móveis e desktop.
+- **Listagem de Produtos:** <br>
+  Visualização de todos os produtos disponibilizados pela API na home page.
+- **Seleção de Categorias de Produtos:** <br>
+  Os produtos disponibilizados na API foram separados e roterizados em categorias (utilizando o Next Routing)
+- **Login seguro:** <br>
+  Sistema de login implementado. As credenciais do usuário são validadas com os dados disponibilizados na API. A listagem de usuários cadastrados deve ser consultada no endpoint "https://fakestoreapi.com/users" (Para monitoramento da API e consulta dos dados de users cadastrados, indico o app [Insomnia](https://insomnia.rest/download).
+- **Responsividade:** <br>
+  Experiência adaptada para dispositivos móveis e desktop.
+- **Detalhes do Produto:** <br>
+  Detalhes sobre cada produto, incluindo preço e descrição. **(Em desenvolvimento)**
+- **Carrinho de Compras:** <br>
+  Adicione produtos ao carrinho e veja um resumo dos itens selecionados. **(Em desenvolvimento)**
 
 ## Tecnologias Utilizadas 🚀
 
@@ -17,7 +25,7 @@ A Mock Store foi idealizada á partir de um desafio técnico e tem como principa
 - <img src="https://skillicons.dev/icons?i=typescript"> **TypeScript**
 - <img src="https://skillicons.dev/icons?i=css"> **Styled Components**
 
-## Como Iniciar 🚀
+## Como Iniciar 💻
 
 1. **Clone o Repositório:**
    ```bash
