@@ -28,6 +28,9 @@ function MyApp({ Component, pageProps, cartItems, setCartItems }: MyAppProps) {
       if (authenticatedUser) {
         setIsLoggedIn(true);
         localStorage.setItem('isLoggedIn', 'true');
+        // const response = await fetch(`https://fakestoreapi.com/carts/user/${authenticatedUser.id}`);
+        // const userCart = await response.json();
+
       } else {
         alert('Credenciais inválidas');
       }

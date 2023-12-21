@@ -14,15 +14,12 @@ interface CartProviderProps {
   setCartItems: Dispatch<SetStateAction<Product[]>>;
 }
 
-export const CartProvider: React.FC<CartProviderProps> = ({ children, cartItems: initialCartItems, setCartItems }) => {
-  const [localCartItems, setLocalCartItems] = useState<Product[]>(initialCartItems);
+export const CartProvider: React.FC<CartProviderProps> = ({ children, cartItems: initialCartItems }) => {
 
-  useEffect(() => {
-    setLocalCartItems(initialCartItems);
-  }, [initialCartItems]);
+  const [cartItems, setCartItems] = useState(initialCartItems);
 
   return (
-    <CartContext.Provider value={{ cartItems: localCartItems, setCartItems }}>
+    <CartContext.Provider value={{ cartItems: cartItems, setCartItems }}>
       {children}
     </CartContext.Provider>
   );

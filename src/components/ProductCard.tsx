@@ -1,6 +1,7 @@
 import React from "react";
 import styled, { keyframes } from "styled-components";
 import { Product } from "../types/types";
+import { useCart } from '../context/CartContext';
 
 interface CardContainerProps {
   isLoading?: boolean;
@@ -132,27 +133,28 @@ const truncateText = (text: string, maxLength: number): string => {
 
 const ProductCard: React.FC<ProductCardProps> = ({
   isLoading = false,
-  product,
-  cartItems,
-  setCartItems,
+  product
 }) => {
+
+  const { cartItems, setCartItems } = useCart();
+
   const truncatedTitle = product ? truncateText(product.title, 25) : "";
   const truncatedDescription = product
-    ? truncateText(product.description || "", 50) 
+    ? truncateText(product.description || "", 50)
     : "Loading...";
 
   const handleAddToCart = () => {
-    console.log("Adding to cart:", product);
+    // console.log("Adding to cart:", product);
     if (product) {
       setCartItems((prevItems) => [...prevItems, product]);
     }
   };
 
   const formattedPrice = isLoading
-  ? "Loading..."
-  : product
-  ? `R$ ${(product.price as unknown as number).toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`
-  : "";
+    ? "Loading..."
+    : product
+      ? `R$ ${(product.price as unknown as number).toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`
+      : "";
 
   return (
     <CardContainer isLoading={isLoading}>

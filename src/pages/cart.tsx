@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import CartPage from '../components/CartPage';
 import { Product } from '../types/types';
 import styled from 'styled-components';
@@ -22,16 +22,26 @@ const CartContainer = styled.div`
 `;
 
 const Cart: React.FC = () => {
-  const [cartItems, setCartItems] = useState();
+  const { cartItems, setCartItems } = useCart();
 
   useEffect(() => {
     const fetchUserCart = async () => {
       try {
-        const userId = 1;
+        const userId = 2;
         const response = await fetch(`https://fakestoreapi.com/carts/user/${userId}`);
         const userCart = await response.json();
-        console.log(userCart)
-        setCartItems(userCart[0].products);
+
+        const getProducts = await fetch(`https://fakestoreapi.com/products`)
+        const allProducts = await getProducts.json();
+
+        const ids = userCart[0].products.map(item => item.productId);
+
+        const cart: [] = []
+        ids.forEach(id => {
+          cart.push(allProducts.find(item => item.id === id))
+        })
+
+        setCartItems(cart)
       } catch (error) {
         console.error('Error fetching user cart:', error);
       }
