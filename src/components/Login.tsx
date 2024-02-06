@@ -20,7 +20,7 @@ const LogoContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  text-align: center;
+  text-align: center; // redundância
 
   @media (max-width: 768px) {
     order: 2;
